@@ -24,25 +24,25 @@ SO THAT I can decide if I want to attend a particular event based on the weather
 
 ## APIs to be used
 
-*ticketmaster
-*openweathermap
-*jQuery
+* ticketmaster
+* openweathermap
+* jQuery
 
 ## Rough breakdown of tasks
 
-*Write the HTML for the landing page
-*Incorporate jQuery, ticketmaster, openweatherapp APIs
-*Link Bulma CSS
-*Create Navbar
-*Create date/city fields w/ submit button
-*Create event information section
-*Create fixed weather forecast section (modal?)
+* Write the HTML for the landing page
+* Incorporate jQuery, ticketmaster, openweatherapp APIs
+* Link Bulma CSS
+* Create Navbar
+* Create date/city fields w/ submit button
+* Create event information section
+* Create fixed weather forecast section (modal?)
 
-*Style the CSS for the landing page
-*Find a good font (or fonts)
-*Ensure proper spacing
+* Style the CSS for the landing page
+* Find a good font (or fonts)
+* Ensure proper spacing
 
-*Write JS
-*AJAX calls for the APIs
-*Populate weather forecast area with new divs for the forecast depending on city
-*Populate the event information area with the events for the city in the dates
+* Write JS
+* AJAX calls for the APIs
+* Populate weather forecast area with new divs for the forecast depending on city
+* Populate the event information area with the events for the city in the dates
