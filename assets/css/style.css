@@ -20,3 +20,15 @@ body {
 .event-content {
     flex: 1 0 auto;
 }
+
+.weather-days {
+    background-color:pink;
+    border: solid gray 2px;
+    height: auto;
+    width: 140px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float:left;
+    padding: 10px;
+    display:block;
+}
