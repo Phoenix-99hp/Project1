@@ -6,3 +6,9 @@ $.ajax({
 }).then(function (response) {
     console.log(response);
 })
+
+$("#city-search").on("click", function (event) {
+    $(".weather-days").remove();
+    event.preventDefault();
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=83ec25aafa25787879adb49e8ad70c00&units=imperial";
+})
