@@ -7,22 +7,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Revelry</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/bulma.sass">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<header>Revelry - Your classy event finder</header>
-<form>
-    <input type="text" name="city" placeholder="City">
-    <br>
-    <input type="text" name="startDate" placeholder="Start Date">
-    <br>
-    <input type="text" name="endDate" placeholder="End Date">
-    <br>
-    <button type="submit">Search</button>
-</form>
 
 <body>
+    <header>Revelry - Your classy event finder</header>
+    <form>
+        <input type="text" name="city" placeholder="City">
+        <br>
+        <input type="text" name="startDate" placeholder="Start Date">
+        <br>
+        <input type="text" name="endDate" placeholder="End Date">
+        <br>
+        <button type="submit" id="city-search">Search</button>
+    </form>
+
+    <main class="event-content"></main>
+    <footer>
+        <div id="recent-searches"></div>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./main.js" type="text/javascript"></script>
 </body>

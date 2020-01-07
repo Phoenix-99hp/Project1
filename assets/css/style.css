@@ -1,0 +1,34 @@
+footer {
+    background-color:gray;
+    flex-shrink: 0;
+    height: 100px;
+    width: 100%;
+}
+
+html,
+body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display:flex;
+    flex-direction: column;
+}
+
+.event-content {
+    flex: 1 0 auto;
+}
+
+.weather-days {
+    background-color:pink;
+    border: solid gray 2px;
+    height: auto;
+    width: 140px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float:left;
+    padding: 10px;
+    display:block;
+}
