@@ -18,7 +18,7 @@ body {
     background-color:pink;
     border: solid gray 2px;
     height: auto;
-    width: 140px;
+    width: 180px;
     margin-right: 10px;
     margin-bottom: 10px;
     float:left;
@@ -77,3 +77,10 @@ form {
 .image {
     margin-top: 15px;
 }
+
+#footer-row {
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    width: 100%;
+} 
