@@ -1,15 +1,34 @@
-var city = "Austin";
-var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?" + "city=" + city + "&apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT";
-$.ajax({
-    url: queryURL,
-    method: "GET"
-}).then(function (response) {
-    console.log(response);
-})
-
 $("#city-search").on("click", function (event) {
     $(".weather-days").remove();
     event.preventDefault();
+    $(".event-content").empty();
+    var city = $("#city").val().trim();
+    var startDate = "2020-01-05T15:48:00Z";
+    var endDate = "2020-01-30T15:48:00Z";
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDate + "&endDateTime=" + endDate + "&city=" + city;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        for (var i = 0; i < response._embedded.events.length; i++) {
+            if (i < 5) {
+                var newListing = $("<div>").addClass("listing");
+                var newImage = $("<img>").addClass("image");
+                var newLink = $("<a>").addClass("link");
+                newLink.text(response._embedded.events[i].name);
+                newImage.attr("src", response._embedded.events[i].images[0].url).css(
+                    "width", "100%");
+                newLink.attr("href", response._embedded.events[i].url);
+                newListing.append(newLink);
+                newListing.append(newImage);
+                $(".event-content").append(newListing);
+            }
+            else if (i >= 5) {
+                break;
+            }
+        }
+    })
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=83ec25aafa25787879adb49e8ad70c00&units=imperial";
 
     // Ajax call for the forecasted weather
