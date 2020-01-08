@@ -1,10 +1,3 @@
-footer {
-    background-color:gray;
-    flex-shrink: 0;
-    height: 140px;
-    width: 100%;
-}
-
 html,
 body {
     display: flex;
@@ -15,7 +8,6 @@ body {
 body {
     display:flex;
     flex-direction: column;
-
 }
 
 .event-content {
@@ -26,21 +18,62 @@ body {
     background-color:pink;
     border: solid gray 2px;
     height: auto;
-    width: 200px;
+    width: 140px;
     margin-right: 10px;
+    margin-bottom: 10px;
     float:left;
     padding: 10px;
     display:block;
-    position: relative;
 }
 
-#footer-row {
+footer {
+    background-color:gray;
+    flex-shrink: 0;
+    display: block;
+    height: 140px;
     width: 100%;
-    margin: auto;
-    display:flex;
-    justify-content: center;
+    position: fixed;
+    bottom: 0px;
 }
 
-#footer-container {
-    width: 100%;
+header {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 35px;
+}
+
+#subHeader {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.event-content {
+    padding: 0 !important;
+}
+
+.container {
+    padding-bottom: 140px;
+}
+
+.listing {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+}
+
+.link {
+    font-size: 30px;
+}
+
+.image {
+    margin-top: 15px;
 }
