@@ -61,9 +61,9 @@ $("#city-search").on("click", function (event) {
                 maxTemp.push(Math.floor(response.list[i].main.temp_max));
             }
             // Sets the day temperature text to the maximum temperature in the maxTemp array
-            $(`#day${day}-temp`).text("Temperature: " + Math.max.apply(Math, maxTemp));
+            $(`#day${day}-temp`).text(Math.max.apply(Math, maxTemp) + "°F");
             // Sets the date of the div
-            $(`#day${day}`).text(moment().add(day, 'days').format("L"));
+            $(`#day${day}`).text(moment().add(day, 'days').format("l"));
             // Calls the determineIcon function to determine which icon to use for the day's weather status
             determineIcon(weatherStatus, day);
 
