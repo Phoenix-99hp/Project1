@@ -73,6 +73,10 @@ form {
 }
 
 .listing {
+    width:60%;
+    text-align:center;
+    margin:0 auto;
+    margin-bottom:10px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 7.5px;
