@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $('.sidenav').sidenav();
+});
+
 $("#city-search").on("click", function (event) {
     $(".weather-days").remove();
     event.preventDefault();
@@ -68,13 +72,13 @@ $("#city-search").on("click", function (event) {
             weatherStatus = response.list[startTime + 4].weather[0].main;
             // Determines the HTML of each div made for the forecast
             html =
-                `<div class="weather-days">
+                `<li class="weather-days">
             <h5 id="day${day}"></h5>
             <i id="day${day}-icon"></i>
             <p id="day${day}-temp">Temp: </p>
-            </div>`;
+            </li>`;
             // Appends the HTML to the forecast-divs div
-            $("#recent-searches").append(html);
+            $("#slide-out").append(html);
 
             // Main for-loop
             for (i = startTime; i < endTime; i++) {
@@ -124,3 +128,4 @@ $("#city-search").on("click", function (event) {
         }
     })
 });
+
