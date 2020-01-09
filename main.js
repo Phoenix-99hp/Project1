@@ -1,11 +1,13 @@
-$("#city-search").on("click", function (event) {
+
+  $("#city-search").on("click", function (event) {
     $(".weather-days").remove();
     event.preventDefault();
     $(".event-content").empty();
     var city = $("#city").val().trim();
-    var startDate = $("#startDate").val().trim() + "T00:00:00Z";
+   var startDate = $("#startDate").val().trim() + "T00:00:00Z";
     var endDate = $("#endDate").val().trim() + "T23:59:59Z";
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDate + "&endDateTime=" + endDate + "&city=" + city;
+    
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*"  + "&startDateTime=" + startDate + "&endDateTime=" + endDate + "&city=" + city;
     $.ajax({
         url: queryURL,
         method: "GET"
