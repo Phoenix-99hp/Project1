@@ -73,10 +73,10 @@ form {
 }
 
 .listing {
-    width: 60%;
-    text-align: center;
-    margin: 0 auto;
-    margin-bottom: 10px;
+    width:60%;
+    text-align:center;
+    margin:0 auto;
+    margin-bottom:10px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 7.5px;
@@ -128,28 +128,12 @@ h5 {
     margin:0;
 }
 
-@media only screen and (max-width: 1132px) {
-    .weather-days {
-        width:150px;
-        padding:0;
-    }
+.page-footer {
+    height: 50px;
 }
 
-
-@media only screen and (max-width: 908px) {
-    .weather-days {
-        font-size: smaller;
-        width: 100%;
-    height: auto;
-    }
-    i {
-        display:none;
-    }
-    h5 {
-        font-size: smaller;
-        float:left;
-    }
-    .weather-days ~ p {
-        float:left;
-    }
+.sidenav-trigger {
+    position: fixed;
+    bottom: 75px;
+    left: 25px;
 }
