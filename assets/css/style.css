@@ -28,6 +28,8 @@ body {
     float:left;
     padding: 10px;
     display:block;
+    text-align:center;
+    flex-shrink:1;
 }
 
 footer {
@@ -98,6 +100,7 @@ form {
     display:flex;
     justify-content: center;
     width: 100%;
+    flex-direction:row;
 }
 
 #city-search {
@@ -119,4 +122,34 @@ input[type=text]:focus {
 .eventDate {
     font-family: 'Work Sans', sans-serif;
     font-size: 13px;
+}
+
+h5 {
+    margin:0;
+}
+
+@media only screen and (max-width: 1132px) {
+    .weather-days {
+        width:150px;
+        padding:0;
+    }
+}
+
+
+@media only screen and (max-width: 908px) {
+    .weather-days {
+        font-size: smaller;
+        width: 100%;
+    height: auto;
+    }
+    i {
+        display:none;
+    }
+    h5 {
+        font-size: smaller;
+        float:left;
+    }
+    .weather-days ~ p {
+        float:left;
+    }
 }
