@@ -18,21 +18,21 @@ $("#city-search").on("click", function (event) {
     var startDateQuery = (startYearQuery + "-" + startMonthQuery + "-" + startDayQuery + "T00:00:00Z");
     var endDateQuery = (endYearQuery + "-" + endMonthQuery + "-" + endDayQuery + "T23:59:59Z");
 
-    // var startDate = $("#startDate").val().trim() + "T00:00:00Z";
-    // var endDate = $("#endDate").val().trim() + "T23:59:59Z";
-
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
+
         for (var i = 0; i < response._embedded.events.length; i++) {
-            if (i < 5) {
+            if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
+            else if ($(".listing").length < 5) {
                 var newListing = $("<div>").addClass("listing");
                 var newImage = $("<img>").addClass("image");
                 var newLink = $("<a>").addClass("link");
                 var newDate = $("<p>").addClass("eventDate");
+
                 newLink.text(response._embedded.events[i].name);
                 newImage.attr("src", response._embedded.events[i].images[0].url).css(
                     "width", "100%");
@@ -41,19 +41,19 @@ $("#city-search").on("click", function (event) {
                 var year = dateResponse.slice(0, 4);
                 var month = dateResponse.slice(5, 7);
                 var day = dateResponse.slice(8);
+
                 newDate.text(month + "-" + day + "-" + year);
                 newListing.append(newLink);
                 newListing.append(newDate);
                 newListing.append(newImage);
-                // newListing.append(newDate);
-
                 $(".event-content").append(newListing);
             }
-            else if (i >= 5) {
+            else if (($(".listing").length >= 5)) {
                 break;
             }
         }
     })
+
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=83ec25aafa25787879adb49e8ad70c00&units=imperial";
 
     // Ajax call for the forecasted weather
