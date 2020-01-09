@@ -64,6 +64,8 @@ $("#city-search").on("click", function (event) {
         console.log(forecastURL);
         console.log(response);
 
+        $("#city-name-weather").text(city + " Forecast");
+
         // Declares generateForecast function with arguments day, time, endtime
         function generateForecast(day, startTime, endTime) {
             // Maxtemp array initialized to 0
@@ -72,14 +74,15 @@ $("#city-search").on("click", function (event) {
             weatherStatus = response.list[startTime + 4].weather[0].main;
             // Determines the HTML of each div made for the forecast
             html =
-                `<li class="weather-days">
+                `<li class="weather-days z-depth-3">
             <h5 id="day${day}"></h5>
-            <i id="day${day}-icon"></i>
-            <p id="day${day}-temp">Temp: </p>
+            <div style="font-size: 2em" id = "day-icon">
+                <i id="day${day}-icon"></i>
+            </div>
+            <p class="day-temp" id="day${day}-temp">Temp: </p>
             </li>`;
             // Appends the HTML to the forecast-divs div
             $("#slide-out").append(html);
-
             // Main for-loop
             for (i = startTime; i < endTime; i++) {
                 // Pushes max temperatures for every three hours to the maxTemp array
@@ -127,5 +130,7 @@ $("#city-search").on("click", function (event) {
 
         }
     })
+
+    $("#slide-out:first-child").text(city + " Forecast");
 });
 

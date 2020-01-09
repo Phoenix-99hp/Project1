@@ -23,13 +23,11 @@ body {
     border: solid gray 2px;
     height: auto;
     width: 180px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 20px auto 10px auto;
     float:left;
     padding: 10px;
     display:block;
     text-align:center;
-    flex-shrink:1;
 }
 
 footer {
@@ -47,7 +45,7 @@ header {
     margin-top: 10px;
     font-size: 96px;
     font-family: 'Allura', cursive;
-    text-shadow: 0px 5px 5px #ee6f72;
+    text-shadow: 0px 3px 2px #ee6f72;
 }
 
 #subHeader {
@@ -129,11 +127,36 @@ h5 {
 }
 
 .page-footer {
-    height: 50px;
+    height: 35px;
+    padding:10px;
 }
 
 .sidenav-trigger {
     position: fixed;
     bottom: 75px;
-    left: 25px;
+left:0px;
+}
+
+#day-icon {
+    float:left;
+}
+
+.day-temp {
+    font-size:24px;
+}
+
+#city-name-weather {
+    font-family: 'Allura', cursive;
+    text-shadow: 0px 2px 2px #ee6f72;
+    text-align: center;
+    font-size:45px;
+    padding:10px;
+}
+
+#slide-out {
+    background-image: url("../../assets/images/carbon.png");
+}
+
+#copyright {
+    text-align:center;
 }
