@@ -7,9 +7,21 @@ $("#city-search").on("click", function (event) {
     event.preventDefault();
     $(".event-content").empty();
     var city = $("#city").val().trim();
-    var startDate = $("#startDate").val().trim() + "T00:00:00Z";
-    var endDate = $("#endDate").val().trim() + "T23:59:59Z";
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDate + "&endDateTime=" + endDate + "&city=" + city + "&sort=date,asc";
+
+    var startMonthQuery = $("#startDate").val().trim().slice(0, 2);
+    var startDayQuery = $("#startDate").val().trim().slice(3, 5);
+    var startYearQuery = $("#startDate").val().trim().slice(6);
+    var endMonthQuery = $("#endDate").val().trim().slice(0, 2);
+    var endDayQuery = $("#endDate").val().trim().slice(3, 5);
+    var endYearQuery = $("#endDate").val().trim().slice(6);
+
+    var startDateQuery = (startYearQuery + "-" + startMonthQuery + "-" + startDayQuery + "T00:00:00Z");
+    var endDateQuery = (endYearQuery + "-" + endMonthQuery + "-" + endDayQuery + "T23:59:59Z");
+
+    // var startDate = $("#startDate").val().trim() + "T00:00:00Z";
+    // var endDate = $("#endDate").val().trim() + "T23:59:59Z";
+
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -25,10 +37,15 @@ $("#city-search").on("click", function (event) {
                 newImage.attr("src", response._embedded.events[i].images[0].url).css(
                     "width", "100%");
                 newLink.attr("href", response._embedded.events[i].url);
-                newDate.text(response._embedded.events[i].dates.start.localDate);
+                var dateResponse = response._embedded.events[i].dates.start.localDate;
+                var year = dateResponse.slice(0, 4);
+                var month = dateResponse.slice(5, 7);
+                var day = dateResponse.slice(8);
+                newDate.text(month + "-" + day + "-" + year);
                 newListing.append(newLink);
-                newListing.append(newImage);
                 newListing.append(newDate);
+                newListing.append(newImage);
+                // newListing.append(newDate);
 
                 $(".event-content").append(newListing);
             }
