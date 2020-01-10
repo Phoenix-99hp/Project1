@@ -8,26 +8,15 @@ $("#city-search").on("click", function (event) {
     $(".event-content").empty();
     var city = $("#city").val().trim();
 
-    // var startMonthQuery = $("#startDate").val().trim().slice(0, 2);
-    // var startDayQuery = $("#startDate").val().trim().slice(3, 5);
-    // var startYearQuery = $("#startDate").val().trim().slice(6);
-    // var endMonthQuery = $("#endDate").val().trim().slice(0, 2);
-    // var endDayQuery = $("#endDate").val().trim().slice(3, 5);
-    // var endYearQuery = $("#endDate").val().trim().slice(6);
-
     var startDateQuery = $("#startDate").val().trim() + "T00:00:00Z";
     var endDateQuery = $("#endDate").val().trim() + "T23:59:59Z";
-    console.log($("#startDate").val().trim());
-    // var startDateQuery = (startYearQuery + "-" + startMonthQuery + "-" + startDayQuery + "T00:00:00Z");
-    // var endDateQuery = (endYearQuery + "-" + endMonthQuery + "-" + endDayQuery + "T23:59:59Z");
 
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&size=199" + "&sort=date,asc";
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-
         for (var i = 0; i < response._embedded.events.length; i++) {
             if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
             else if ($(".listing").length < 5) {
@@ -35,6 +24,8 @@ $("#city-search").on("click", function (event) {
                 var newImage = $("<img>").addClass("image");
                 var newLink = $("<a>").addClass("link");
                 var newDate = $("<p>").addClass("eventDate");
+
+                $("#storage").text(response._embedded.events[i].id);
 
                 newLink.text(response._embedded.events[i].name);
                 newImage.attr("src", response._embedded.events[i].images[0].url).css(
@@ -136,3 +127,64 @@ $("#city-search").on("click", function (event) {
 
     $("#slide-out:first-child").text(city + " Forecast");
 });
+
+$("#more").on("click", function (event) {
+    event.preventDefault();
+    var lastEventId = [""];
+    lastEventId.splice(0, 1, $("#storage").text());
+    $(".event-content").empty();
+
+    var city = $("#city").val().trim();
+    var startDateQuery = $("#startDate").val().trim() + "T00:00:00Z";
+    var endDateQuery = $("#endDate").val().trim() + "T23:59:59Z";
+
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&size=199" + "&sort=date,asc";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+
+        function checkForLastEvent() {
+            for (i = 0; i < response._embedded.events.length; i++)
+                if (response._embedded.events[i].id == lastEventId[0]) {
+                    return i;
+                }
+        }
+
+        var lastEventIndex = checkForLastEvent();
+
+        function generateNextFiveEvents() {
+            for (i = lastEventIndex; i < response._embedded.events.length; i++) {
+                if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
+                else if ($(".listing").length < 5) {
+                    var newListing = $("<div>").addClass("listing");
+                    var newImage = $("<img>").addClass("image");
+                    var newLink = $("<a>").addClass("link");
+                    var newDate = $("<p>").addClass("eventDate");
+
+                    $("#storage").text(response._embedded.events[i].id);
+
+                    newLink.text(response._embedded.events[i].name);
+                    newImage.attr("src", response._embedded.events[i].images[0].url).css(
+                        "width", "100%");
+                    newLink.attr("href", response._embedded.events[i].url);
+                    var dateResponse = response._embedded.events[i].dates.start.localDate;
+                    var year = dateResponse.slice(0, 4);
+                    var month = dateResponse.slice(5, 7);
+                    var day = dateResponse.slice(8);
+
+                    newDate.text(month + "-" + day + "-" + year);
+                    newListing.append(newLink);
+                    newListing.append(newDate);
+                    newListing.append(newImage);
+                    $(".event-content").append(newListing);
+                }
+                else if (($(".listing").length >= 5)) {
+                    break;
+                }
+            }
+        }
+        generateNextFiveEvents();
+    })
+})
+

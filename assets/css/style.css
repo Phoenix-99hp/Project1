@@ -101,7 +101,7 @@ form {
     flex-direction:row;
 }
 
-#city-search {
+#city-search, #more {
     background-color: #ee6f72;
     font-family: 'Work Sans', sans-serif;
 }
@@ -163,3 +163,7 @@ left:0px;
 }
 
 ::-webkit-inner-spin-button { display: none; }
+
+#storage {
+    display: none;
+}
