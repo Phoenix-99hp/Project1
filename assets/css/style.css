@@ -175,3 +175,19 @@ left:0px;
 #storage {
     display:none;
 }
+
+#city-search {
+   margin-left: 10px;
+}
+
+@media screen and (max-width: 811px) {
+    #more {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    #more {
+        margin-left: 0px;
+    }
+}
