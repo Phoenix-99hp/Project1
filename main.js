@@ -13,8 +13,7 @@ $("#city-search").on("click", function (event) {
     var city = $("#city").val().trim();
     var startDateQuery = $("#startDate").val().trim() + "T00:00:00Z";
     var endDateQuery = $("#endDate").val().trim() + "T23:59:59Z";
-    console.log($("#startDate").val().trim());
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&size=199" + "&sort=date,asc";
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -40,6 +39,8 @@ $("#city-search").on("click", function (event) {
                         var newImage = $("<img>").addClass("image");
                         var newLink = $("<a>").addClass("link");
                         var newDate = $("<p>").addClass("eventDate");
+
+                        $("#storage").text(response._embedded.events[i].id);
 
                         newLink.text(response._embedded.events[i].name);
                         newImage.attr("src", response._embedded.events[i].images[0].url).css(
