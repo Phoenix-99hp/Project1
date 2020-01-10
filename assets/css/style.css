@@ -104,6 +104,7 @@ form {
 #city-search {
     background-color: #ee6f72;
     font-family: 'Work Sans', sans-serif;
+    margin-top:5px;
 }
 
 input:focus {
