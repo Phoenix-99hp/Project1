@@ -101,7 +101,7 @@ form {
     flex-direction:row;
 }
 
-#city-search {
+#city-search, #more {
     background-color: #ee6f72;
     font-family: 'Work Sans', sans-serif;
     margin-top:5px;
@@ -170,4 +170,8 @@ left:0px;
     font-size:45px;
     padding:10px;
     text-align: center;
+}
+
+#storage {
+    display:none;
 }
