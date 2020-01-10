@@ -21,8 +21,6 @@ $("#city-search").on("click", function (event) {
     // var startDateQuery = (startYearQuery + "-" + startMonthQuery + "-" + startDayQuery + "T00:00:00Z");
     // var endDateQuery = (endYearQuery + "-" + endMonthQuery + "-" + endDayQuery + "T23:59:59Z");
 
-
-
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
     $.ajax({
         url: queryURL,
@@ -138,26 +136,3 @@ $("#city-search").on("click", function (event) {
 
     $("#slide-out:first-child").text(city + " Forecast");
 });
-
-// $("#more").on("click", function (event) {
-//     event.preventDefault();
-//     var lastEventName = [];
-//     lastEventName.splice(0, 1, $(".link").last().text());
-//     $(".event-content").empty();
-
-//     var startDateQuery = (startYearQuery + "-" + startMonthQuery + "-" + startDayQuery + "T00:00:00Z");
-//     var endDateQuery = (endYearQuery + "-" + endMonthQuery + "-" + endDayQuery + "T23:59:59Z");
-
-//     var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         var responseIndex = response._embedded.events.findIndex(lastEventName[0]);
-//         if (responseIndex);
-//     })
-// })
-
-// if (response._embedded.events[i].name == lastEventName[0]) {
-
-// }
