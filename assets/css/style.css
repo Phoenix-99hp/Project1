@@ -164,3 +164,10 @@ left:0px;
 }
 
 ::-webkit-inner-spin-button { display: none; }
+
+.city-load-error {
+    font-family: 'Allura', cursive;
+    font-size:45px;
+    padding:10px;
+    text-align: center;
+}
