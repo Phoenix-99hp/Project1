@@ -2,48 +2,64 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
 });
 
+var main = $("#main-content");
+var errorMessage = $(".city-load-error");
+
 $("#city-search").on("click", function (event) {
+    errorMessage.hide();
     $(".weather-days").remove();
     event.preventDefault();
     $(".event-content").empty();
     var city = $("#city").val().trim();
-
     var startDateQuery = $("#startDate").val().trim() + "T00:00:00Z";
     var endDateQuery = $("#endDate").val().trim() + "T23:59:59Z";
-
-    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&size=199" + "&sort=date,asc";
+    console.log($("#startDate").val().trim());
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=WJBXz9pjG5TmRa7XUYBxAoBwsZnR4TZT&locale=*" + "&startDateTime=" + startDateQuery + "&endDateTime=" + endDateQuery + "&city=" + city + "&sort=date,asc";
     $.ajax({
         url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        for (var i = 0; i < response._embedded.events.length; i++) {
-            if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
-            else if ($(".listing").length < 5) {
-                var newListing = $("<div>").addClass("listing");
-                var newImage = $("<img>").addClass("image");
-                var newLink = $("<a>").addClass("link");
-                var newDate = $("<p>").addClass("eventDate");
-
-                $("#storage").text(response._embedded.events[i].id);
-
-                newLink.text(response._embedded.events[i].name);
-                newImage.attr("src", response._embedded.events[i].images[0].url).css(
-                    "width", "100%");
-                newLink.attr("href", response._embedded.events[i].url);
-                var dateResponse = response._embedded.events[i].dates.start.localDate;
-                var year = dateResponse.slice(0, 4);
-                var month = dateResponse.slice(5, 7);
-                var day = dateResponse.slice(8);
-
-                newDate.text(month + "-" + day + "-" + year);
-                newListing.append(newLink);
-                newListing.append(newDate);
-                newListing.append(newImage);
-                $(".event-content").append(newListing);
+        method: "GET",
+        error: function (response, exception) {
+            if (response.status === 0 || response.status == 404 || response.status == 500 || exception === 'parsererror' || exception === 'timeout' || exception === 'abort') {
+                $(errorMessage).text("Uh oh. Something went wrong.");
+                errorMessage.show();
+                main.append(errorMessage)
+                return;
             }
-            else if (($(".listing").length >= 5)) {
-                break;
+        },
+        success: function (response) {
+            if (response._embedded == undefined) {
+                $(errorMessage).text("Whoops! Please search for another city.");
+                errorMessage.show();
+                main.append(errorMessage);
+                return;
+            } else {
+                for (var i = 0; i < response._embedded.events.length; i++) {
+                    if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
+                    else if ($(".listing").length < 5) {
+                        var newListing = $("<div>").addClass("listing");
+                        var newImage = $("<img>").addClass("image");
+                        var newLink = $("<a>").addClass("link");
+                        var newDate = $("<p>").addClass("eventDate");
+
+                        newLink.text(response._embedded.events[i].name);
+                        newImage.attr("src", response._embedded.events[i].images[0].url).css(
+                            "width", "100%");
+                        newLink.attr("href", response._embedded.events[i].url);
+                        var dateResponse = response._embedded.events[i].dates.start.localDate;
+                        var year = dateResponse.slice(0, 4);
+                        var month = dateResponse.slice(5, 7);
+                        var day = dateResponse.slice(8);
+
+                        newDate.text(month + "-" + day + "-" + year);
+                        newListing.append(newLink);
+                        newListing.append(newDate);
+                        newListing.append(newImage);
+                        $(".event-content").append(newListing);
+                    }
+                    else if (($(".listing").length >= 5)) {
+                        break;
+                    }
+                }
             }
         }
     })

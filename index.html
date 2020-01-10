@@ -24,12 +24,14 @@
     </ul>
     <a class="waves-effect waves-light btn sidenav-trigger" href="#" data-target="slide-out"><i
             class="material-icons left">cloud</i>5-Day Forecast</a>
-    <div class="container">
+    <div class="container" id="main-content">
         <div class="row">
             <form>
                 <input class="col s12" type="text" name="city" id="city" placeholder="City">
-                <input class="col s6" type="date" name="startDate" id="startDate" placeholder="Start Date: MM-DD-YYYY">
-                <input class="col s6" type="date" name="endDate" id="endDate" placeholder="End Date: MM-DD-YYYY">
+                <input class="col s4" type="date" name="startDate" id="startDate" placeholder="Start Date: MM-DD-YYYY">
+                <div class="col s1"></div>
+                <input class="col s4" type="date" name="endDate" id="endDate" placeholder="End Date: MM-DD-YYYY">
+                <div class="col s1"></div>
                 <a class="waves-effect waves-light btn" id="city-search">Search</a>
                 <a class="waves-effect waves-light btn" id="more">More</a>
 
@@ -37,6 +39,7 @@
             <main class="event-content col s12">
 
             </main>
+            <p class="city-load-error"></p>
         </div>
     </div>
     <p id="storage"></p>
