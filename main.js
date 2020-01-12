@@ -26,14 +26,18 @@ $("#city-search").on("click", function (event) {
             }
         },
         success: function (response) {
+
             if (response._embedded == undefined) {
                 $(errorMessage).text("Whoops! Please search for another city.");
                 errorMessage.show();
                 main.append(errorMessage);
                 return;
             } else {
+                var startDayInput = startDateQuery.slice(8, 10);
                 for (var i = 0; i < response._embedded.events.length; i++) {
+                    var startDayResponse = response._embedded.events[i].dates.start.localDate.slice(8);
                     if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
+                    else if (startDayInput > startDayResponse) { continue; }
                     else if ($(".listing").length < 5) {
                         var newListing = $("<div>").addClass("listing");
                         var newImage = $("<img>").addClass("image");
@@ -143,6 +147,7 @@ $("#city-search").on("click", function (event) {
     })
 
     $("#slide-out:first-child").text(city + " Forecast");
+    $("#more").css("visibility", "visible");
 });
 
 $("#more").on("click", function (event) {
@@ -171,8 +176,11 @@ $("#more").on("click", function (event) {
         var lastEventIndex = checkForLastEvent();
 
         function generateNextFiveEvents() {
+            var startDayInput = startDateQuery.slice(8, 10);
             for (i = lastEventIndex; i < response._embedded.events.length; i++) {
+                var startDayResponse = response._embedded.events[i].dates.start.localDate.slice(8);
                 if (response._embedded.events[i].name == "No Longer on Sale for Web") { continue; }
+                else if (startDayInput > startDayResponse) { continue; }
                 else if ($(".listing").length < 5) {
                     var newListing = $("<div>").addClass("listing");
                     var newImage = $("<img>").addClass("image");
@@ -204,4 +212,3 @@ $("#more").on("click", function (event) {
         generateNextFiveEvents();
     })
 })
-

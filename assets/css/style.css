@@ -186,8 +186,18 @@ left:0px;
     }
 }
 
-@media screen and (max-width: 431px) {
-    #more {
+/* @media screen and (max-width: 431px) {
+    #more, #city-search {
         margin-left: 0px;
     }
+} */
+
+@media screen and (max-width: 431px) {
+    #more, #city-search {
+        margin-left: 0px;
+    }
+}
+
+#more {
+    visibility: hidden;
 }
